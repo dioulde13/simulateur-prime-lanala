@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.DS_Store
+
+# Builds locaux (générés par PyInstaller / py2app / Buildozer)
+build/
+dist/
+*.egg-info/
+.venv/
+mobile/.buildozer/
+mobile/bin/

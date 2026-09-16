@@ -1,0 +1,23 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build APK avec Buildozer
+        uses: ArtemSBulgakov/buildozer-action@v1
+        with:
+          workdir: mobile
+          buildozer_version: stable
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SimulateurPrimeLanala-Android
+          path: mobile/bin/*.apk
