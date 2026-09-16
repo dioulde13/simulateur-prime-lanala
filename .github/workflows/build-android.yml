@@ -11,11 +11,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build APK avec Buildozer
-        uses: ArtemSBulgakov/buildozer-action@v1
-        with:
-          workdir: mobile
-          buildozer_version: stable
+      - name: Build APK avec l'image Docker officielle Buildozer
+        run: |
+          # On monte tout le dépôt (pas seulement mobile/) pour que le lien
+          # symbolique mobile/core -> ../core reste résolvable dans le conteneur.
+          docker run --rm \
+            -v "${{ github.workspace }}:/home/user/hostcwd" \
+            -w /home/user/hostcwd/mobile \
+            kivy/buildozer android debug
 
       - uses: actions/upload-artifact@v4
         with:
